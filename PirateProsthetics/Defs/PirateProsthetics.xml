@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+	<!-- Pirate Prosthetics Bases -->
+	
+	<ThingDef Name="PirateProstheticEyepatchBase" ParentName="BodyPartBase" Abstract="True">
+		<techLevel>Neolithic</techLevel>
+		<thingCategories>
+		<li>BodyPartsProsthetic</li>
+		</thingCategories>
+		<graphicData>
+		<texPath>Things/Item/BodyPart/PP_Eyepatch</texPath>
+		<graphicClass>Graphic_Single</graphicClass>
+		<drawSize>0.90</drawSize>
+		</graphicData>
+		<statBases>
+		<WorkToMake>1800</WorkToMake>
+		</statBases>
+	</ThingDef>
+	
+	<ThingDef Name="PirateProstheticHookHandBase" ParentName="BodyPartBase" Abstract="True">
+		<techLevel>Medieval</techLevel>
+		<thingCategories>
+		<li>BodyPartsProsthetic</li>
+		</thingCategories>
+		<graphicData>
+		<texPath>Things/Item/Health/HealthItem</texPath>
+		<graphicClass>Graphic_Single</graphicClass>
+		<drawSize>0.80</drawSize>
+		<color>(97,106,115)</color>
+		</graphicData>
+		<statBases>
+		<WorkToMake>1800</WorkToMake>
+		</statBases>
+	</ThingDef>
+	
+	<!-- Unfinished Eyepatch Base -->
+	
+	<ThingDef ParentName="UnfinishedBase">
+	<defName>UnfinishedEyepatchPirateProsthetic</defName>
+	<label>unfinished eyepatch</label>
+	<description>An unfinished eyepatch.</description>
+	<graphicData>
+		<texPath>Things/Item/Unfinished/PP_UnfinishedEyepatch</texPath>
+		<graphicClass>Graphic_Single</graphicClass>
+		<drawSize>0.90</drawSize>
+	</graphicData>
+	<stuffCategories>
+		<li>Fabric</li>
+		<li>Leathery</li>
+	</stuffCategories>
+	<comps>
+		<li>
+		<compClass>CompColorable</compClass>
+		</li>
+	</comps>
+	</ThingDef>
+	
+	<!-- Makeable Pirate Prosthetics Bases -->
+	
+	<ThingDef Name="PirateProstheticEyepatchMakeableBase" ParentName="PirateProstheticEyepatchBase" Abstract="True">
+		<recipeMaker>
+			<workSpeedStat>GeneralLaborSpeed</workSpeedStat>
+			<workSkill>Crafting</workSkill>
+			<effectWorking>Tailor</effectWorking>
+			<soundWorking>Recipe_Tailor</soundWorking>
+			<recipeUsers>
+			<li>ElectricTailoringBench</li>
+			<li>HandTailoringBench</li>
+			<li>CraftingSpot</li>
+			</recipeUsers>
+			<skillRequirements>
+			<Crafting>2</Crafting>
+			</skillRequirements>
+			<unfinishedThingDef>UnfinishedEyepatchPirateProsthetic</unfinishedThingDef>
+		</recipeMaker>
+	</ThingDef>
+
+	<ThingDef Name="PirateProstheticHookHandMakeableBase" ParentName="PirateProstheticHookHandBase" Abstract="True">
+		<recipeMaker>
+			<workSpeedStat>GeneralLaborSpeed</workSpeedStat>
+			<workSkill>Crafting</workSkill>
+			<effectWorking>Smith</effectWorking>
+			<soundWorking>Recipe_Smith</soundWorking>
+			<recipeUsers>
+			<li>ElectricSmithy</li>
+			<li>FueledSmithy</li>
+			</recipeUsers>
+			<skillRequirements>
+			<Crafting>4</Crafting>
+			</skillRequirements>
+			<unfinishedThingDef>UnfinishedHealthItemProsthetic</unfinishedThingDef>
+			<researchPrerequisite>Smithing</researchPrerequisite>
+		</recipeMaker>
+	</ThingDef>
+	
+	<!-- Install Prosthetic Bases -->
+	
+	<RecipeDef Name="SurgeryPirateProstheticBase" ParentName="SurgeryFlesh" Abstract="True">
+		<workerClass>Recipe_InstallArtificialBodyPart</workerClass>
+		<workAmount>500</workAmount>
+		<skillRequirements>
+		<Medicine>0</Medicine>
+		</skillRequirements>
+		<recipeUsers>
+		<li>Human</li>
+		</recipeUsers>
+		<ingredients>
+		<li>
+		<filter><categories><li>Medicine</li></categories></filter>
+		<count>1</count>
+		</li>
+		</ingredients>
+		<fixedIngredientFilter>
+		<categories>
+		<li>Medicine</li>
+		</categories>
+		</fixedIngredientFilter>
+	</RecipeDef>
+
+	<RecipeDef Name="SurgeryInstallPirateProstheticBase" ParentName="SurgeryPirateProstheticBase" Abstract="True">
+		<surgerySuccessChanceFactor>5</surgerySuccessChanceFactor>
+		<deathOnFailedSurgeryChance>0</deathOnFailedSurgeryChance>
+	</RecipeDef>
+	
+	<!-- Remove Prosthetics -->
+	
+	<!-- Eyepatch -->
+	
+  <HediffDef ParentName="AddedBodyPartBase">
+    <defName>PP_Eyepatch</defName>
+    <label>Eyepatch</label>
+    <labelNoun>an eyepatch</labelNoun>
+    <description>An eyepatch worn over the eye, it's often seen as intimidating by most cultures, and as a result, it affects the wearer's social impact.</description>
+    <descriptionHyperlinks><ThingDef>PP_Eyepatch</ThingDef></descriptionHyperlinks>
+    <spawnThingOnRemoved>PP_Eyepatch</spawnThingOnRemoved>
+    <addedPartProps>
+      <solid>true</solid>
+      <partEfficiency>0.0</partEfficiency>
+    </addedPartProps>
+	<stages>
+	<li>
+     <statOffsets>
+           <SocialImpact>+0.10</SocialImpact>
+     </statOffsets>
+	</li>
+	</stages>
+  </HediffDef>
+
+  <ThingDef ParentName="PirateProstheticEyepatchMakeableBase">
+    <defName>PP_Eyepatch</defName>
+    <label>eyepatch</label>
+    <description>An eyepatch that can be secured over an eye, it's often seen as intimidating by most cultures, and as a result, it affects the wearer's social impact.</description>
+    <descriptionHyperlinks><RecipeDef>InstallPirateProstheticEyepatch</RecipeDef></descriptionHyperlinks>
+    <costStuffCount>10</costStuffCount>
+    <statBases>
+      <Mass>0.04</Mass>
+    </statBases>
+	<stuffCategories>
+      <li>Fabric</li>
+	  <li>Leathery</li>
+    </stuffCategories>
+  </ThingDef>
+
+  <RecipeDef ParentName="SurgeryInstallPirateProstheticBase">
+    <defName>InstallPirateProstheticEyepatch</defName>
+    <label>install eyepatch</label>
+    <description>Install an eyepatch.</description>
+    <descriptionHyperlinks><ThingDef>PP_Eyepatch</ThingDef></descriptionHyperlinks>
+    <jobString>Installing Eyepatch.</jobString>
+    <ingredients>
+		<li>
+		<filter>
+			<thingDefs>
+				<li>PP_Eyepatch</li>
+			</thingDefs>
+        </filter>
+        <count>1</count>
+		</li>
+    </ingredients>
+    <fixedIngredientFilter>
+      <thingDefs>
+        <li>PP_Eyepatch</li>
+      </thingDefs>
+    </fixedIngredientFilter>
+    <appliedOnFixedBodyParts>
+      <li>Eye</li>
+    </appliedOnFixedBodyParts>
+    <addsHediff>PP_Eyepatch</addsHediff>
+  </RecipeDef>
+  
+<!-- Hook Hand -->
+	
+  <HediffDef ParentName="AddedBodyPartBase">
+    <defName>PP_HookHand</defName>
+    <label>Hook</label>
+    <labelNoun>a hook hand</labelNoun>
+    <description>A metal hook, although less efficient than a natural hand, it doubles as a weapon.</description>
+    <descriptionHyperlinks><ThingDef>PP_HookHand</ThingDef></descriptionHyperlinks>
+    <spawnThingOnRemoved>PP_HookHand</spawnThingOnRemoved>
+    <addedPartProps>
+      <solid>true</solid>
+      <partEfficiency>0.30</partEfficiency>
+    </addedPartProps>
+	<comps>
+    <li Class="HediffCompProperties_VerbGiver">
+	<tools>
+	<li>
+		<label>hook</label>
+		<capacities>
+		<li>Cut</li>
+		</capacities>
+		<power>13</power>
+		<cooldownTime>1.8</cooldownTime>
+    </li>
+    </tools>
+    </li>
+    </comps>
+  </HediffDef>
+
+  <ThingDef ParentName="PirateProstheticHookHandMakeableBase">
+    <defName>PP_HookHand</defName>
+    <label>hook hand</label>
+    <description>A metal hook that replaces a missing hand; although less efficient than a natural hand, it doubles as a weapon.</description>
+    <descriptionHyperlinks><RecipeDef>InstallPirateProstheticHookHand</RecipeDef></descriptionHyperlinks>
+    <costList>
+		<Steel>35</Steel>
+    </costList>
+    <statBases>
+      <Mass>0.5</Mass>
+    </statBases>
+  </ThingDef>
+
+  <RecipeDef ParentName="SurgeryInstallPirateProstheticBase">
+    <defName>InstallPirateProstheticHookHand</defName>
+    <label>install hook hand</label>
+    <description>Install a Hook Hand.</description>
+    <descriptionHyperlinks><ThingDef>PP_HookHand</ThingDef></descriptionHyperlinks>
+    <jobString>Installing Hook Hand.</jobString>
+    <ingredients>
+		<li>
+		<filter>
+			<thingDefs>
+				<li>PP_HookHand</li>
+			</thingDefs>
+        </filter>
+        <count>1</count>
+		</li>
+    </ingredients>
+    <fixedIngredientFilter>
+      <thingDefs>
+        <li>PP_HookHand</li>
+      </thingDefs>
+    </fixedIngredientFilter>
+    <appliedOnFixedBodyParts>
+      <li>Hand</li>
+    </appliedOnFixedBodyParts>
+    <addsHediff>PP_HookHand</addsHediff>
+  </RecipeDef>
+
+</Defs>
